@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IMovieDao {
     List<Movie> findAll();
+    List<Movie> getRandom();
+
 }

@@ -11,16 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/movies")
 public class MovieController {
 
-    @Autowired
     private MovieService movieService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.GET, path = "/movies", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     List<Movie>  findAll()  {
         List<Movie> movies = movieService.findAll();
         return  movies;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/movies/random", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    List<Movie>  getRandom()  {
+        List<Movie> movies = movieService.getRandom();
+        return  movies;
+    }
+
+    @Autowired
+    public void setMovieService(MovieService movieService) {
+        this.movieService = movieService;
     }
 
 }

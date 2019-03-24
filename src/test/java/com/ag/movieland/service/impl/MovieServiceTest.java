@@ -13,6 +13,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class MovieServiceTest {
+
     @Test
     public void getAllMovies() {
         MovieDao movieDao = mock(MovieDao.class);
@@ -51,4 +52,63 @@ public class MovieServiceTest {
             assertTrue(expectedMovieList.contains(actualMovie));
         }
     }
+    @Test
+    public void testGetRandomMovies() {
+
+        MovieDao movieDao = mock(MovieDao.class);
+
+        List<Movie> expectedMovieList = new ArrayList<Movie>();
+
+        Movie movieFirst = new Movie();
+        movieFirst.setId(5);
+        movieFirst.setNameRussian("1+1");
+        movieFirst.setNameNative("Intouchables");
+        movieFirst.setYearOfRelease(2011);
+        movieFirst.setRating(8.3);
+        movieFirst.setPrice(120);
+        movieFirst.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1._SY209_CR0,0,140,209_.jpg");
+        expectedMovieList.add(movieFirst);
+
+        Movie movieSecond = new Movie();
+        movieSecond.setId(9);
+        movieSecond.setNameRussian("Звёздные войны: Эпизод 4 – Новая надежда");
+        movieSecond.setNameNative("Star Wars");
+        movieSecond.setYearOfRelease(1977);
+        movieSecond.setRating(8.1);
+        movieSecond.setPrice(198.98);
+        movieSecond.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BYTUwNTdiMzMtNThmNS00ODUzLThlMDMtMTM5Y2JkNWJjOGQ2XkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1._SX140_CR0,0,140,209_.jpg");
+        expectedMovieList.add(movieSecond);
+
+        Movie movieThird = new Movie();
+        movieThird.setId(22);
+        movieThird.setNameRussian("Укрощение строптивого");
+        movieThird.setNameNative("Il bisbetico domato");
+        movieThird.setYearOfRelease(1980);
+        movieThird.setRating(7.7);
+        movieThird.setPrice(120.0);
+        movieThird.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5NTM5OTY0Nl5BMl5BanBnXkFtZTcwNjg1MjcyMQ@@._V1._SY209_CR3,0,140,209_.jpg");
+        expectedMovieList.add(movieThird);
+
+        Movie movieFourth = new Movie();
+        movieFourth.setId(23);
+        movieFourth.setNameRussian("Блеф");
+        movieFourth.setNameNative("Bluff storia di truffe e di imbroglioni");
+        movieFourth.setYearOfRelease(1976);
+        movieFourth.setRating(7.6);
+        movieFourth.setPrice(100.0);
+        movieFourth.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMjk5YmMxMjMtMTlkNi00YTI5LThhYTMtOTk2NmNiNzQwMzI0XkEyXkFqcGdeQXVyMTQ3Njg3MQ@@._V1._SX140_CR0,0,140,209_.jpg");
+        expectedMovieList.add(movieFourth);
+
+        MovieService movieService = new MovieService(movieDao);
+
+        when(movieDao.findAll()).thenReturn(expectedMovieList);
+
+        List<Movie> actualMovieList = movieService.getRandom();
+
+        for (Movie actualMovie : actualMovieList) {
+            assertTrue(expectedMovieList.contains(actualMovie));
+        }
+
+    }
+
 }

@@ -23,4 +23,10 @@ public class MovieService implements IMovieService {
        List<Movie> movies = movieDao.findAll();
        return movies;
     }
+
+    @Override
+    public List<Movie> getRandom() {
+        List<Movie> movies = movieDao.getRandom();
+        return movies;
+    }
 }
