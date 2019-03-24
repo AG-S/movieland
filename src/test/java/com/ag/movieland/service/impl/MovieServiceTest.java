@@ -111,4 +111,54 @@ public class MovieServiceTest {
 
     }
 
+    @Test
+    public void testGetMoviesByGenre() throws Exception {
+
+        MovieDao movieDao = mock(MovieDao.class);
+
+        List<Movie> expectedMovieList = new ArrayList<>();
+
+        Movie movieFirst = new Movie();
+        movieFirst.setId(5);
+        movieFirst.setNameRussian("1+1");
+        movieFirst.setNameNative("Intouchables");
+        movieFirst.setYearOfRelease(2011);
+        movieFirst.setRating(8.3);
+        movieFirst.setPrice(120);
+        movieFirst.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1._SY209_CR0,0,140,209_.jpg");
+        expectedMovieList.add(movieFirst);
+
+        Movie movieSecond = new Movie();
+        movieSecond.setId(22);
+        movieSecond.setNameRussian("Укрощение строптивого");
+        movieSecond.setNameNative("Il bisbetico domato");
+        movieSecond.setYearOfRelease(1980);
+        movieSecond.setRating(7.7);
+        movieSecond.setPrice(120.0);
+        movieSecond.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5NTM5OTY0Nl5BMl5BanBnXkFtZTcwNjg1MjcyMQ@@._V1._SY209_CR3,0,140,209_.jpg");
+        expectedMovieList.add(movieSecond);
+
+        Movie movieThird = new Movie();
+        movieThird.setId(23);
+        movieThird.setNameRussian("Блеф");
+        movieThird.setNameNative("Bluff storia di truffe e di imbroglioni");
+        movieThird.setYearOfRelease(1976);
+        movieThird.setRating(7.6);
+        movieThird.setPrice(100.0);
+        movieThird.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMjk5YmMxMjMtMTlkNi00YTI5LThhYTMtOTk2NmNiNzQwMzI0XkEyXkFqcGdeQXVyMTQ3Njg3MQ@@._V1._SX140_CR0,0,140,209_.jpg");
+        expectedMovieList.add(movieThird);
+
+        MovieService movieService = new MovieService(movieDao);
+
+        when(movieDao.findByGenreId(1)).thenReturn(expectedMovieList);
+
+        List<Movie> actualMovieList = movieService.findByGenreId(1);
+
+        for (Movie actualMovie : actualMovieList) {
+            assertTrue(expectedMovieList.indexOf(actualMovie) > -1);
+        }
+
+        assertEquals(3, expectedMovieList.size());
+    }
+
 }

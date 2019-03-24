@@ -12,6 +12,7 @@
 
         <jdbc:script location="classpath:/insertmovies.sql" />
         <jdbc:script location="classpath:/insertgenres.sql" />
+        <jdbc:script location="classpath:/insertgenrestomovie.sql" />
     </jdbc:embedded-database>
 
 </beans>

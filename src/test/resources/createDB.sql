@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS genre
 	name varchar(64)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS genrestomovie
+(
+	id  INTEGER IDENTITY PRIMARY KEY,
+	movie INTEGER,
+	genre INTEGER
+)
+;

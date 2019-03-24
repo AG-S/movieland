@@ -7,4 +7,5 @@ import java.util.List;
 public interface IMovieService {
     List<Movie> findAll();
     List<Movie> getRandom();
+    List<Movie> findByGenreId(int id);
 }
