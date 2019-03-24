@@ -81,4 +81,32 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$", hasSize(limitRows)));
     }
 
+    @Test
+    public void testGetMoviesByGenreId() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/movies/genre/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].id", equalTo(5)))
+                .andExpect(jsonPath("$[0].nameRussian", equalTo("1+1")))
+                .andExpect(jsonPath("$[0].nameNative", equalTo("Intouchables")))
+                .andExpect(jsonPath("$[0].yearOfRelease", equalTo(2011)))
+                .andExpect(jsonPath("$[0].rating", equalTo(8.3)))
+                .andExpect(jsonPath("$[0].price", equalTo(120.0)))
+                .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1._SY209_CR0,0,140,209_.jpg")))
+                .andExpect(jsonPath("$[1].id", equalTo(22)))
+                .andExpect(jsonPath("$[1].nameRussian", equalTo("Укрощение строптивого")))
+                .andExpect(jsonPath("$[1].nameNative", equalTo("Il bisbetico domato")))
+                .andExpect(jsonPath("$[1].yearOfRelease", equalTo(1980)))
+                .andExpect(jsonPath("$[1].rating", equalTo(7.7)))
+                .andExpect(jsonPath("$[1].price", equalTo(120.0)))
+                .andExpect(jsonPath("$[1].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5NTM5OTY0Nl5BMl5BanBnXkFtZTcwNjg1MjcyMQ@@._V1._SY209_CR3,0,140,209_.jpg")))
+                .andExpect(jsonPath("$[2].id", equalTo(23)))
+                .andExpect(jsonPath("$[2].nameRussian", equalTo("Блеф")))
+                .andExpect(jsonPath("$[2].nameNative", equalTo("Bluff storia di truffe e di imbroglioni")))
+                .andExpect(jsonPath("$[2].yearOfRelease", equalTo(1976)))
+                .andExpect(jsonPath("$[2].rating", equalTo(7.6)))
+                .andExpect(jsonPath("$[2].price", equalTo(100.0)))
+                .andExpect(jsonPath("$[2].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BMjk5YmMxMjMtMTlkNi00YTI5LThhYTMtOTk2NmNiNzQwMzI0XkEyXkFqcGdeQXVyMTQ3Njg3MQ@@._V1._SX140_CR0,0,140,209_.jpg")));
+    }
 }

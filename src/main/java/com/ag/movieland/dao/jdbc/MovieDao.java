@@ -18,6 +18,8 @@ public class MovieDao implements IMovieDao {
     private String findAllMovies;
     private String findRandomMovies;
 
+    private String findMoviesByGenreId;
+
     public List<Movie> findAll() {
         List<Movie> movies = jdbcTemplate.query(findAllMovies, MOVIE_ROW_MAPPER);
         return movies;
@@ -26,6 +28,12 @@ public class MovieDao implements IMovieDao {
     @Override
     public List<Movie> getRandom() {
         List<Movie> movies = jdbcTemplate.query(findRandomMovies, MOVIE_ROW_MAPPER);
+        return movies;
+    }
+
+    @Override
+    public List<Movie> findByGenreId(int id) {
+        List<Movie> movies = jdbcTemplate.query(findMoviesByGenreId, MOVIE_ROW_MAPPER, id);
         return movies;
     }
 
@@ -42,6 +50,11 @@ public class MovieDao implements IMovieDao {
     @Autowired
     public void setFindRandomMovies(String findRandomMovies) {
         this.findRandomMovies = findRandomMovies;
+    }
+
+    @Autowired
+    public void setFindMoviesByGenreId(String findMoviesByGenreId) {
+        this.findMoviesByGenreId = findMoviesByGenreId;
     }
 
 }
