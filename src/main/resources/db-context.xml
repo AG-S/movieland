@@ -14,4 +14,8 @@
         <constructor-arg value="Select id, namerussian, namenative, yearofrelease, rating, price, picturepath From movies Order by random() limit ${sql.limitrandommovies}"/>
     </bean>
 
+    <bean id="findAllGenres" class="java.lang.String">
+        <constructor-arg value="Select id, name From genre;"/>
+    </bean>
+
 </beans>
