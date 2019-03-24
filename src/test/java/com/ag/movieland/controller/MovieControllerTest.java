@@ -39,7 +39,7 @@ public class MovieControllerTest {
     }
     @Test
     public void testGetAllMovies() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/movies"))//get("/movies"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/movies"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(4)))

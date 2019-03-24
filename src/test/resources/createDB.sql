@@ -9,3 +9,10 @@ CREATE TABLE IF NOT EXISTS movies
 	picturepath  varchar(256)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS genre
+(
+	id  INTEGER IDENTITY PRIMARY KEY,
+	name varchar(64)
+)
+;
