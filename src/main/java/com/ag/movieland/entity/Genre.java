@@ -24,4 +24,27 @@ public class Genre {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Genre genre = (Genre) obj;
+        return id == genre.id
+                && (name == genre.name
+                || (name != null && name.equals(genre.getName())));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + id;
+        return result;
+    }
 }

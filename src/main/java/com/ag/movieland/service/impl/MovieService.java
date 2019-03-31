@@ -1,6 +1,6 @@
 package com.ag.movieland.service.impl;
 
-import com.ag.movieland.dao.jdbc.MovieDao;
+import com.ag.movieland.dao.IMovieDao;
 import com.ag.movieland.entity.Movie;
 import com.ag.movieland.service.IMovieService;
 import org.slf4j.Logger;
@@ -15,18 +15,18 @@ public class MovieService implements IMovieService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private MovieDao movieDao;
+    private IMovieDao movieDao;
 
     @Autowired
-    public MovieService(MovieDao movieDao) {
+    public MovieService(IMovieDao movieDao) {
         this.movieDao = movieDao;
     }
 
     @Override
     public List<Movie> findAll() {
-       logger.info("find All Movies");
-       List<Movie> movies = movieDao.findAll();
-       return movies;
+        logger.info("find All Movies");
+        List<Movie> movies = movieDao.findAll();
+        return movies;
     }
 
     @Override
