@@ -24,12 +24,6 @@
     <constructor-arg ref="dataSource"/>
 </bean>
 
-<task:annotation-driven scheduler="myScheduler"/>
-<task:scheduler id="myScheduler" pool-size="10"/>
-<task:scheduled-tasks scheduler="myScheduler">
-    <task:scheduled ref="CachedGenreDao" method="initCachedGenres" fixed-delay="${refresh-interval-millis}"/>
-</task:scheduled-tasks>
-
 <!--database-->
 <bean id="dataSource" class="org.postgresql.ds.PGSimpleDataSource">
     <property name="user" value="${db.user}"/>
