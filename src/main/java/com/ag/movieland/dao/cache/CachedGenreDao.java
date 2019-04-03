@@ -6,17 +6,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
+@EnableScheduling
 @Primary
-@Repository("CachedGenreDao")
+@Repository
 public class CachedGenreDao implements IGenreDao {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private List<Genre> cachedGenres;
+    private volatile List<Genre> cachedGenres;
 
     private IGenreDao genreDao;
 
@@ -31,8 +35,9 @@ public class CachedGenreDao implements IGenreDao {
     }
 
     @PostConstruct
+    @Scheduled(fixedDelayString = "${refresh-interval-millis}")
     public void initCachedGenres() {
-        cachedGenres = genreDao.findAll();
+        cachedGenres = new ArrayList<>(genreDao.findAll());
         logger.info("Genre cache has been refreshed. Total size of Genre cache is : {}", cachedGenres.size());
     }
 
