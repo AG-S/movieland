@@ -7,7 +7,7 @@
 
     <!--queries -->
     <bean id="findAllMovies" class="java.lang.String">
-        <constructor-arg value="Select id, namerussian, namenative, yearofrelease, rating, price, picturepath From movies;"/>
+        <constructor-arg value="Select id, namerussian, namenative, yearofrelease, rating, price, picturepath From movies"/>
     </bean>
 
     <bean id="findRandomMovies" class="java.lang.String">
@@ -15,7 +15,7 @@
     </bean>
 
     <bean id="findMoviesByGenreId" class="java.lang.String">
-        <constructor-arg value="Select m.id, m.namerussian, m.namenative, m.yearofrelease, m.rating, m.price, m.picturepath From movies m, genrestomovie gm Where m.id = gm.movie and gm.genre = ?;"/>
+        <constructor-arg value="Select m.id, m.namerussian, m.namenative, m.yearofrelease, m.rating, m.price, m.picturepath From movies m, genrestomovie gm Where m.id = gm.movie and gm.genre = ?"/>
     </bean>
 
     <bean id="findAllGenres" class="java.lang.String">

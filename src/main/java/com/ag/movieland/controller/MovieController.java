@@ -1,5 +1,6 @@
 package com.ag.movieland.controller;
 
+import com.ag.movieland.dao.common.SortingParameters;
 import com.ag.movieland.entity.Movie;
 import com.ag.movieland.service.IMovieService;
 import org.slf4j.Logger;
@@ -17,9 +18,12 @@ public class MovieController {
     private IMovieService movieService;
 
     @GetMapping(path = "/movies", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    List<Movie> findAll() {
+    List<Movie> findAll(@RequestParam(value = "rating", required = false) String ratingOrdering,
+                        @RequestParam(value = "price", required = false) String priceOrdering) {
         logger.info("find All Movies");
-        List<Movie> movies = movieService.findAll();
+        SortingParameters sortingParameters = new SortingParameters();
+        sortingParameters.addSortingParameters(ratingOrdering, priceOrdering);
+        List<Movie> movies = movieService.findAll(sortingParameters);
         return movies;
     }
 
@@ -31,9 +35,13 @@ public class MovieController {
     }
 
     @GetMapping(path = "/movies/genre/{genreId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    List<Movie> findByGenreId(@PathVariable int genreId) {
+    List<Movie> findByGenreId(@PathVariable int genreId,
+                              @RequestParam(value = "rating", required = false) String ratingOrdering,
+                              @RequestParam(value = "price", required = false) String priceOrdering) {
         logger.info("find Movies by Genre ID");
-        List<Movie> movies = movieService.findByGenreId(genreId);
+        SortingParameters sortingParameters = new SortingParameters();
+        sortingParameters.addSortingParameters(ratingOrdering, priceOrdering);
+        List<Movie> movies = movieService.findByGenreId(genreId, sortingParameters);
         return movies;
     }
 

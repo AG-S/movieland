@@ -1,6 +1,7 @@
 package com.ag.movieland.service.impl;
 
 import com.ag.movieland.dao.IMovieDao;
+import com.ag.movieland.dao.common.SortingParameters;
 import com.ag.movieland.entity.Movie;
 import com.ag.movieland.service.IMovieService;
 import org.slf4j.Logger;
@@ -23,9 +24,9 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> findAll() {
+    public List<Movie> findAll(SortingParameters sortingParameters) {
         logger.info("find All Movies");
-        List<Movie> movies = movieDao.findAll();
+        List<Movie> movies = movieDao.findAll(sortingParameters);
         return movies;
     }
 
@@ -37,9 +38,9 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> findByGenreId(int id) {
+    public List<Movie> findByGenreId(int id, SortingParameters sortingParameters) {
         logger.info("find Movies by Genre ID");
-        List<Movie> movies = movieDao.findByGenreId(id);
+        List<Movie> movies = movieDao.findByGenreId(id, sortingParameters);
         return movies;
     }
 }

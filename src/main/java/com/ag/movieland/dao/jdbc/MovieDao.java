@@ -1,6 +1,7 @@
 package com.ag.movieland.dao.jdbc;
 
 import com.ag.movieland.dao.IMovieDao;
+import com.ag.movieland.dao.common.SortingParameters;
 import com.ag.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.ag.movieland.entity.Movie;
 import org.slf4j.Logger;
@@ -24,10 +25,12 @@ public class MovieDao implements IMovieDao {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public List<Movie> findAll() {
+    @Override
+    public List<Movie> findAll(SortingParameters sortingParameters) {
         logger.info("find All Movies");
         long startTime = System.currentTimeMillis();
-        List<Movie> movies = jdbcTemplate.query(findAllMovies, MOVIE_ROW_MAPPER);
+        QueryBuilder queryBuilder = new QueryBuilder(findAllMovies,sortingParameters);
+        List<Movie> movies = jdbcTemplate.query(queryBuilder.getSQL(), MOVIE_ROW_MAPPER);
         logger.debug("Query took:{} ms", System.currentTimeMillis() - startTime);
         return movies;
     }
@@ -42,10 +45,11 @@ public class MovieDao implements IMovieDao {
     }
 
     @Override
-    public List<Movie> findByGenreId(int id) {
+    public List<Movie> findByGenreId(int id, SortingParameters sortingParameters) {
         logger.info("find Movies by Genre Id");
         long startTime = System.currentTimeMillis();
-        List<Movie> movies = jdbcTemplate.query(findMoviesByGenreId, MOVIE_ROW_MAPPER, id);
+        QueryBuilder queryBuilder = new QueryBuilder(findMoviesByGenreId, sortingParameters);
+        List<Movie> movies = jdbcTemplate.query(queryBuilder.getSQL(), MOVIE_ROW_MAPPER, id);
         logger.debug("Query took:{} ms", System.currentTimeMillis() - startTime);
         return movies;
     }

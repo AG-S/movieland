@@ -42,9 +42,9 @@ public class MovieServiceTest {
 
         MovieService movieService = new MovieService(movieDao);
 
-        when(movieDao.findAll()).thenReturn(expectedMovieList);
+        when(movieDao.findAll(null)).thenReturn(expectedMovieList);
 
-        List<Movie> actualMovieList = movieService.findAll();
+        List<Movie> actualMovieList = movieService.findAll(null);
 
         assertEquals(2, actualMovieList.size());
 
@@ -101,7 +101,7 @@ public class MovieServiceTest {
 
         MovieService movieService = new MovieService(movieDao);
 
-        when(movieDao.findAll()).thenReturn(expectedMovieList);
+        when(movieDao.findAll(null)).thenReturn(expectedMovieList);
 
         List<Movie> actualMovieList = movieService.getRandom();
 
@@ -150,9 +150,9 @@ public class MovieServiceTest {
 
         MovieService movieService = new MovieService(movieDao);
 
-        when(movieDao.findByGenreId(1)).thenReturn(expectedMovieList);
+        when(movieDao.findByGenreId(1, null)).thenReturn(expectedMovieList);
 
-        List<Movie> actualMovieList = movieService.findByGenreId(1);
+        List<Movie> actualMovieList = movieService.findByGenreId(1, null);
 
         for (Movie actualMovie : actualMovieList) {
             assertTrue(expectedMovieList.indexOf(actualMovie) > -1);
