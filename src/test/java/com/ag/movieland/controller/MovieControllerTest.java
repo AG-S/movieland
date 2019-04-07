@@ -305,9 +305,9 @@ public class MovieControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/movies/genre/1?rating=asc"))
                 .andExpect(status().isOk());
     }
-    @Test (expected = Exception.class)
+    @Test
     public void testGetMoviesByGenreIdOrederingByRatingFakeSorting() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/movies/genre/1?rating=dasc"))
-                .andExpect(status().isOk());
+                .andExpect(status().isBadRequest());
     }
 }
