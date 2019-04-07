@@ -31,13 +31,13 @@ public class CachedGenreDao implements IGenreDao {
 
     @Override
     public List<Genre> findAll() {
-        return cachedGenres;
+        return new ArrayList<>(cachedGenres);
     }
 
     @PostConstruct
     @Scheduled(fixedDelayString = "${refresh-interval-millis}")
     public void initCachedGenres() {
-        cachedGenres = new ArrayList<>(genreDao.findAll());
+        cachedGenres = genreDao.findAll();
         logger.info("Genre cache has been refreshed. Total size of Genre cache is : {}", cachedGenres.size());
     }
 
