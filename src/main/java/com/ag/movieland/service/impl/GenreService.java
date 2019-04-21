@@ -1,6 +1,6 @@
 package com.ag.movieland.service.impl;
 
-import com.ag.movieland.dao.jdbc.GenreDao;
+import com.ag.movieland.dao.IGenreDao;
 import com.ag.movieland.entity.Genre;
 import com.ag.movieland.service.IGenreService;
 import org.slf4j.Logger;
@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 public class GenreService implements IGenreService {
 
-    private GenreDao genreDao;
+    private IGenreDao genreDao;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public GenreService (GenreDao genreDao) {
+    public GenreService(IGenreDao genreDao) {
         this.genreDao = genreDao;
     }
 
@@ -27,6 +27,5 @@ public class GenreService implements IGenreService {
         List<Genre> genres = genreDao.findAll();
         return genres;
     }
-
 
 }
